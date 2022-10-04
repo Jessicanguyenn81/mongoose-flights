@@ -5,7 +5,8 @@ const Flight = require('../models/flight')
 module.exports = {
     new: newFlights,
     create,
-    index
+    index,
+    show
 }
 
 function newFlights (req, res) {
@@ -16,7 +17,7 @@ function newFlights (req, res) {
     // Format the date for the value attribute of the input
     let departsDate = `${dt.getFullYear()}-${(dt.getMonth() + 1).toString().padStart(2, '0')}`;
     departsDate += `-${dt.getDate().toString().padStart(2, '0')}T${dt.toTimeString().slice(0, 5)}`;
-    res.render('flights/new', { departsDate });
+    res.render('flights/new', {departsDate});
 }
 
 function create (req, res) {
@@ -31,8 +32,14 @@ function create (req, res) {
 
 function index (req, res) {
     Flight.find({}, function(err, flights) {
-        res.render('flights/index', {
-            flights
-        })
+        res.render('flights/index', { 
+            title: 'All Flights', flights})
+    })
+}
+
+function show (req, res){
+    Flight.findById(req.params.id, function(err, flight){
+        res.render('flights/show', {
+            title:'Flight Details', flight})
     })
 }
