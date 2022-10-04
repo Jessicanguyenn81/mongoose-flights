@@ -36,7 +36,9 @@ const flightSchema = new Schema({
             //this function needs to return a new date object thats a year from now
         }
 
-    }
+    }, 
+    destinations: [destinationSchema]
+
 })
 
 module.exports = mongoose.model('Flight', flightSchema)
