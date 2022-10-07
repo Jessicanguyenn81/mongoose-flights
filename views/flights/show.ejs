@@ -11,6 +11,7 @@
         <div><%= flight.departs %></div>
     </section>
     <br><br>
+    <a href="/tickets/new/<%= flight._id %>"<%- title === 'Add Ticket' ? 'class="active"' : '' %>>ADD TICKET</a>
     <h2>Destinations</h2>
     <form id="add-destination-form" method="POST" action="/flights/<%= flight._id %>/destinations">
         <label>Destination:</label>
@@ -47,6 +48,12 @@
         <h5>No Destinations Added</h5>
       <% } %>
 
+      <section id="badge-container">
+     
+        <%- tickets.map(t => `<li>Seat - ${t.seat} &nbsp; <span>$ ${t.price}</span></li>`).join(''); %>
+
+      
+      </section>
 
 
     <%- include('../partials/footer') %>
